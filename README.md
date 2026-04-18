@@ -1,1 +1,2 @@
-# screen-change-monitor
+# Screen Change Monitor
+Screen Sentry is a lightweight desktop monitoring tool that watches a user‑selected region of the screen, detects text changes using OCR, and automatically emails a screenshot and extracted text whenever the content updates. It’s designed for situations where you need passive monitoring of logs, dashboards, terminals, or any on‑screen information that doesn’t provide native notifications.
