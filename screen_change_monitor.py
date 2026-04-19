@@ -124,7 +124,7 @@ def send_email(client_email, email_content):
 def preprocess_img(img):
     img_np = np.array(img)
     gray = cv2.cvtColor(img_np, cv2.COLOR_BGR2GRAY)
-    _, thresh = cv2.adaptiveThreshold(
+    thresh = cv2.adaptiveThreshold(
         gray, 255,
         cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
         cv2.THRESH_BINARY,
