@@ -26,6 +26,7 @@ email_subject = config.email_subject
 pytesseract.pytesseract.tesseract_cmd = config.tesseract
 img_path = config.output_img_path
 bbox = []
+is_running = True
 
 
 class ConsoleRedirect:
@@ -74,6 +75,8 @@ def main():
 
 
 def start_thread():
+    global is_running
+    is_running = True
     t = threading.Thread(target=monitor)
     t.start()
 
@@ -91,7 +94,9 @@ def on_capture_complete(left, top, right, bottom):
 
 
 def end_monitor():
-    end_monitor.has_been_called = True
+    global is_running
+    is_running = False
+    print("|=========================STOPPED==========================|")
 
 
 def email_content(client_email, image_path, body):
@@ -139,11 +144,7 @@ def extract_text(processed_img):
 
 def monitor():
     previous_text = ""
-    end_monitor.has_been_called = False
-    while True:
-        if end_monitor.has_been_called:
-            print("|=========================STOPPED==========================|")
-            break
+    while is_running:
         img = ImageGrab.grab(bbox)
         processed_img = preprocess_img(img)
         current_text = extract_text(processed_img)
